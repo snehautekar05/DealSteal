@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@500&family=Montserrat:wght@100&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Lora', serif!important;
+    font-size: 15px;
+}
+input,select,textarea{
+    min-height: 45px !important;
+    /* width:400px!important;  */
+    border:1px solid rgb(210, 204, 204) ;
+    width: 100%;
+}
+
+input:focus{
+ outline: none!important;   
+ border:1px solid black!important ;
+ box-shadow: none;
+ 
+}
+ button{
+    height: 45px!important;
+    /* width: 400px!important; */
+    box-shadow: none!important;
+   
+ }
+
+ .add{
+    width: 150px!important;
+ }
+
+ table{
+   border:gray 1px solid!important;
+   border-radius: 2px;
+ }
+
+ i{
+    font-size:20px!important;
+ }
+
+ .max-width{
+   max-width: max-content !important;
+}
+
+
+ 
