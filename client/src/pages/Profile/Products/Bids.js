@@ -48,12 +48,7 @@ function Bids({
       title: "Bid Amount",
       dataIndex: "bidAmount",
     },
-    {
-      title: "Bid Date",
-      dataIndex: "createdAt",
-      render: (text, record) => moment(text).format("DD-MM-YYYY hh:mm a "),
-    },
-
+    
     {
       title: 'Message',
       dataIndex: 'message',

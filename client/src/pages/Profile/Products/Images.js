@@ -43,8 +43,9 @@ function Images({ selectedProduct, setShowProductForm, getData }) {
                 selectedProduct._id,
                 updatedProduct);
             if (response.success) {
-                message.success(response.message)
-                setImages(updatedImagesArray)
+                message.success(response.message);
+                setImages(updatedImagesArray);
+                setFile(null);
                 getData();
             } else {
                 throw new Error(response.message);
@@ -79,14 +80,11 @@ function Images({ selectedProduct, setShowProductForm, getData }) {
                     setFile(info.file);
                     setShowPreview(true);
                 }}
+                fileList={file?[file]:[]}
                 showUploadList={showPreview}
             >
 
-
-
-
-
-                <Button type='default'>Upload Image </Button>
+           <Button type='default'>Upload Image </Button>
             </Upload>
 
             <div className='flex justify-end gap-5 mt-5'>

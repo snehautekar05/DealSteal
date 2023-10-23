@@ -1,7 +1,9 @@
 const router = require('express').Router();
 const Product = require('../models/productModel');
+const User = require("../models/userModel");
 const authMiddleware = require("../middlewares/authMiddleware");
 const cloudinary = require("../config/cloudinaryConfig");
+const Notification=require("../models/notificationsModel")
 const multer = require("multer");
 
 
@@ -10,6 +12,18 @@ router.post('/add-product', authMiddleware, async (req, res) => {
     try {
         const newProduct = new Product(req.body)
         await newProduct.save()
+        //send notifications to admin
+        const admins = await User.find({ role: "admin" });
+        admins.forEach(async (admin) => {
+            const newNotification = new Notification({
+                user: admin._id,
+                message: `New product added by ${req.user.name}`,
+                title: "New Product",
+                link: `/admin`,
+                read: false
+            });
+            await newNotification.save();
+        });
         res.send({
             success: true,
             message: "Product added successfully"
@@ -66,15 +80,15 @@ router.post('/add-product', authMiddleware, async (req, res) => {
 
 router.post("/get-products", async (req, res) => {
     try {
-        const {seller, category=[], age=[], status} = req.body
+        const { seller, category = [], age = [], status } = req.body
         let filters = {}
-        if(seller){
+        if (seller) {
             filters.seller = seller;
         }
         if (status) {
             filters.status = status;
-           }
-       
+        }
+
         //filter by category
         if (category.length > 0) {
             filters.category = { $in: category };
@@ -90,13 +104,10 @@ router.post("/get-products", async (req, res) => {
             });
         }
 
-
-
-
         const products = await Product.find(filters).populate('seller').sort({ createdAt: -1 });
         res.send({
             success: true,
-            data : products,
+            data: products,
         });
     } catch (error) {
         res.send({
@@ -124,7 +135,7 @@ router.put("/edit-product/:id", authMiddleware, async (req, res) => {
 });
 
 //get a product by id
-router.get("/get-product-by-id/:id",authMiddleware, async (req, res) => {
+router.get("/get-product-by-id/:id", authMiddleware, async (req, res) => {
     try {
         const product = await Product.findById(req.params.id).populate('seller');
         res.send({
@@ -193,7 +204,17 @@ router.post('/upload-image-to-product', authMiddleware, multer({ storage: storag
 router.put("/update-product-status/:id", authMiddleware, async (req, res) => {
     try {
         const { status } = req.body;
-        await Product.findByIdAndUpdate(req.params.id, { status });
+        const updatedProduct = await Product.findByIdAndUpdate(req.params.id, { status });
+        //send notification to seller
+        const newNotification = new Notification({
+            user: updatedProduct.seller,
+            message: `Your product ${updatedProduct.name} has been ${status}`,
+            title: "product status updated",
+            onClick: `/profile`,
+            read: false,
+        });
+        await newNotification.save()
+
         res.send({
             success: true,
             message: "Product status updated successfully",
@@ -205,6 +226,12 @@ router.put("/update-product-status/:id", authMiddleware, async (req, res) => {
         });
     }
 });
+
+
+
+
+
+
 
 
 module.exports = router;

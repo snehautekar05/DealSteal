@@ -117,6 +117,7 @@ function ProductsForm({ showProductForm, setShowProductForm, selectedProduct, ge
                       <option value='fashion'>Fashion</option>
                       <option value='home'> Home </option>
                       <option value='sports'>Sports</option>
+                      <option value='books'>books</option>
                     </select>
                   </Form.Item>
                 </Col>

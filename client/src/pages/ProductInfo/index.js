@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector,useDispatch } from 'react-redux'
 import { GetAllBids, GetProductById, GetProducts } from '../../apicalls/products'
@@ -7,16 +7,27 @@ import { message,Button} from 'antd';
 import  Divider from '../../components/Divider';
 import moment from 'moment';
 import BidModal from './BidModal';
+import { addToCart } from '../../redux/cartSlice';
+
+
 
 
 function ProductInfo() {
   const {user}=useSelector((state)=>state.users);
    const [showAddNewBid,setShowAddNewBid]=React.useState(false);
+   const [cart, setCart] = useState([]); // Create a cart state
     const [selectedImageIndex,setSelectedImageIndex]=React.useState(0)
     const [product,setProduct]=React.useState(null)
     const dispatch=useDispatch();
     const navigate=useNavigate()
     const {id}=useParams();
+
+      // Function to add a product to the cart
+      const handleAddToCart = (product) => {
+        dispatch(addToCart(product));
+        navigate("/cart");
+      };
+    
 
     const getData = async () => {
         try {
@@ -36,7 +47,7 @@ function ProductInfo() {
           message.error(error.message);
         }
       }
-      
+     
       React.useEffect(()=>{
         getData();
       },[])
@@ -50,6 +61,8 @@ function ProductInfo() {
                     alt=""
                     className="w-full h-96 object-cover rounded-md"
                     />
+
+
 
 
                     <div className='flex gap-5'>
@@ -71,6 +84,8 @@ function ProductInfo() {
                     <Divider />
 
 
+
+
                     <div className='text-gray-600'>
                         <h1>
                             Added On
@@ -81,8 +96,11 @@ function ProductInfo() {
                     </div>
 
 
+
+
                 </div>
 
+               
 
                 {/* details */}
                 <div className='flex flex-col gap-5 p-5'>
@@ -94,6 +112,8 @@ function ProductInfo() {
                         {product.description}
                     </span>
                     </div>
+
+
 
 
                     <Divider />
@@ -132,6 +152,14 @@ function ProductInfo() {
                                 </span>
                             </div>
                     </div>
+                            <Button
+                                        type="primary"
+                                        onClick={() => handleAddToCart(product)}
+                                    >
+                                        Add to Cart
+                                    </Button>
+
+
 
 
                     <Divider />
@@ -139,15 +167,21 @@ function ProductInfo() {
                         <h1 className='text-2xl font-semibold text-lime-6 text-orange-900'>
                             Seller Details
                             </h1>
+                            {product && product.seller && (
                             <div className='flex justify-between mt-2'>
                                 <span>Name</span>
                                 <span>{product.seller.name}</span>
                             </div>
+                            )}
+                            {product && product.seller && (
                             <div className='flex justify-between mt-2'>
                                 <span>Email</span>
                                 <span>{product.seller.email} </span>
                             </div>
+                            )}
                     </div>
+
+
 
 
                     <Divider />
@@ -157,20 +191,20 @@ function ProductInfo() {
                             Bids
                         </h1>
                         <Button onClick={() => setShowAddNewBid(!showAddNewBid)}
-                        disabled={user._id === product.seller._id}>
+                        disabled={user?._id === product.seller?._id}>
                         New Bid
                         </Button>
                         </div>
                         {
                             product.showBidsOnProductPage &&
-                        product.bids.map((bid) =>{
+                        product?.bids?.map((bid) =>{
                             return(
                                 <div className='border border-gray-300 border-solid p-3 rounded mt-5'>
                                 <div className='flex justify-between  text-gray-700'>
                                 <span>Name</span>
-                                <span>{bid.buyer.name}</span>
+                                <span>{bid.buyer?.name || 'N/A'}</span>
                                 </div>
-                                
+                               
                                 <div className='flex justify-between  text-gray-700'>
                                 <span>Bid Amount</span>
                                 <span>₹ {bid.bidAmount}</span>
@@ -182,7 +216,7 @@ function ProductInfo() {
                                 </div>
                             );
                         })}
-                        
+                       
                     </div>
                 </div>
                 </div>
@@ -194,10 +228,14 @@ function ProductInfo() {
                 />}
 
 
-          
+
+
+         
         </div>
     )
 }
+
+
 
 
 export default ProductInfo;

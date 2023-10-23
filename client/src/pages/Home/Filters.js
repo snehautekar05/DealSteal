@@ -18,6 +18,10 @@ const categories =[
         name: "Sports",
         value: "sports"
     },
+    {
+        name: "Books",
+        value: "books"
+    },
 ];
 
 
@@ -55,11 +59,11 @@ function Filters({ showFilters, setShowFilters, filters, setFilters }) {
                 <h1 className='text-gray-600'>Categories</h1>
 
 
-                <div className='flex flex-col gap-1'>
+                <div className='flex flex-col '>
                     {categories.map((category) => {
                         return (
                             <div className='flex items-center gap-2'>
-                                <input type="checkbox" name="category" className='max-width'
+                                <input type="checkbox" name="category" className='max-width '
                                 checked={filters.category.includes(category.value)}
                                 onChange={(e) => {
                                     if (e.target.checked) {
@@ -88,7 +92,7 @@ function Filters({ showFilters, setShowFilters, filters, setFilters }) {
 
 
                 <h1 className='text-gray-600 mt-5'>Ages</h1>
-                <div className='flex flex-col gap-1'>
+                <div className='flex flex-col'>
                     {ages.map((age) => {
                         return (
                             <div className='flex gap-2 items-center'>

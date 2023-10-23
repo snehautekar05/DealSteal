@@ -31,6 +31,16 @@ export const EditProduct = async (id, payload) => {
     }
 };
 
+// //edit a bid
+// export const EditBid = async (id, payload) => {
+//     try {
+//         const response = await axiosInstance.put(`/api/products/edit-bid/${id}`, payload);
+//         return response.data;
+//     } catch (error) {
+//         return error.message
+//     }
+// };
+
 //get a product by id
 export const GetProductById = async (id) => {
     try {
@@ -89,8 +99,8 @@ export const PlaceNewBid = async (payload) => {
 };
 
 
-//get all bids
-export const GetAllBids = async (filters) => {
+// get all bids
+export const GetAllBids = async (filters)=> {
     try {
         const response = await axiosInstance.get('/api/bids/get-all-bids', filters);
         return response.data;
@@ -98,3 +108,14 @@ export const GetAllBids = async (filters) => {
         return error.message
     }
 };
+// In your apicalls/products.js file
+// export const GetAllBids = async (productId) => {
+//     try {
+//         const response = await axiosInstance.get('/api/bids/get-all-bids', {
+//             params: {product: productId }, // Pass the productId as a filter
+//         });
+//         return response.data;
+//     } catch (error) {
+//         return error.message;
+//     }
+// };
