@@ -101,6 +101,48 @@ function ProductsForm({ showProductForm, setShowProductForm, selectedProduct, ge
                 rules={rules}>
                 <TextArea type='text' />
               </Form.Item>
+              {/* <Form.Item label='Location' name='location'
+                rules={rules}>
+                <TextArea type='text' />
+              </Form.Item> */}
+              <Col span={8}>
+                  <Form.Item label='Category' name='category'
+                    rules={rules}>
+                    <select >
+                      <option value=''>Select</option>
+                      <option value='andhra Pradesh'>Andhra Pradesh</option>
+                      <option value='arunachal Pradesh'>Arunachal Pradesh</option>
+                      <option value='assam'>Assam</option>
+                      <option value='bihar'>Bihar</option>
+                      <option value='chhattisgarh'>Chhattisgarh</option>
+                      <option value='goa'>Goa</option>
+                      <option value='gujarat'>Gujarat</option>
+                      <option value='haryana'>Haryana</option>
+                      <option value='himachal Pradesh'>Himachal Pradesh</option>
+                      <option value='jharkhand'>Jharkhand</option>
+                      <option value='karnataka'>Karnataka</option>
+                      <option value='kerala'>Kerala</option>
+                      <option value='madhya Pradesh'>Madhya Pradesh</option>
+                      <option value='maharashtra'>Maharashtra</option>
+                      <option value='manipur'>Manipur</option>
+                      <option value='meghalaya'>Meghalaya</option>
+                      <option value='nagaland'>Nagaland</option>
+                      <option value='odisha'>Odisha</option>
+                      <option value='punjab'>Punjab</option>
+                      <option value='rajasthan'>Rajasthan</option>
+                      <option value='sikkim'>Sikkim</option>
+                      <option value='tamil Nadu'>Tamil Nadu</option>
+                      <option value='telangana'>Telangana</option>
+                      <option value='tripura'>Tripura</option>
+                      <option value='uttar Pradesh'>Uttar Pradesh</option>
+                      <option value='uttarakhand'>Uttarakhand</option>
+                      <option value='west Bengal'>West Bengal</option>
+                      
+             
+                    </select>
+                  </Form.Item>
+                </Col>
+
               <Row gutter={[16, 16]}>
                 <Col span={8}>
                   <Form.Item label='Price' name='price'

@@ -1,20 +1,14 @@
 import axios from 'axios';
 export const url = "http://localhost:5000/api";
 
-// export const setHeaders = () => {
-//   const headers = {
-//     headers: {
-//       "x-auth-token": localStorage.getItem("token"),
-//     },
-//   };
 
-//   return headers;
-// };
 export const axiosInstance=axios.create({
     headers:{
        authorization:`Bearer ${localStorage.getItem('token')}`
     }
 })
+export default axiosInstance;
+
 // import axios from 'axios';
 
 // export const url = 'http://localhost:5000/api';
@@ -31,4 +25,3 @@ export const axiosInstance=axios.create({
 // // For example, you can call this function after a user logs in
 // // setAuthorizationHeader(localStorage.getItem('token'));
 
-// export default axiosInstance;

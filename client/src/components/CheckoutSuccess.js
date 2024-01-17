@@ -22,7 +22,7 @@ const CheckoutSuccess = () => {
       <p>Check your order status at your profile after about 10mins.</p>
       <p>
         Incase of any inqueries contact the support at{" "}
-        <strong>support@onlineshop.com</strong>
+        <strong>support@dealsteal.com</strong>
       </p>
     </Container>
   );

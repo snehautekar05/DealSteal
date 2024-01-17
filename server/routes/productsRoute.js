@@ -80,7 +80,7 @@ router.post('/add-product', authMiddleware, async (req, res) => {
 
 router.post("/get-products", async (req, res) => {
     try {
-        const { seller, category = [], age = [], status } = req.body
+        const { seller, category = [], age = [],location=[], status } = req.body
         let filters = {}
         if (seller) {
             filters.seller = seller;
@@ -93,7 +93,11 @@ router.post("/get-products", async (req, res) => {
         if (category.length > 0) {
             filters.category = { $in: category };
         }
-
+        
+        //filter by location
+        if (location.length > 0) {
+            filters.location = { $in: location };
+        }
 
         //filter by age
         if (age.length > 0) {
@@ -102,6 +106,7 @@ router.post("/get-products", async (req, res) => {
                 const toAge = item.split("-")[1];
                 filters.age = { $gte: fromAge, $lte: toAge };
             });
+           
         }
 
         const products = await Product.find(filters).populate('seller').sort({ createdAt: -1 });

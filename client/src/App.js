@@ -12,6 +12,7 @@ import ProductInfo from './pages/ProductInfo';
 import CartDetails from './components/CartDetails';
 import Cancel from './components/Cancel'
 import CheckoutSuccess from './components/CheckoutSuccess';
+import Stripe from 'stripe';
 
 function App() {
   const { loading } = useSelector(state => state.loaders);
@@ -29,6 +30,7 @@ function App() {
           <Route  path='/cancel' element={<Cancel />}/>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+         
         </Routes>
       </BrowserRouter>
     </div>

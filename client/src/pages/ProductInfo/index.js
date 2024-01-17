@@ -126,6 +126,11 @@ function ProductInfo() {
                                 <span>₹ {product.price}</span>
                             </div>
                             <div className='flex justify-between mt-2'>
+                                <span>Location</span>
+                                <span>{product.location}</span>
+                            </div>
+
+                            <div className='flex justify-between mt-2'>
                                 <span>Category</span>
                                 <span className='uppercase'> {product.category}</span>
                             </div>

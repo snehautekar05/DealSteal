@@ -30,11 +30,17 @@ function Login() {
       message.error(error.message);
     }
   };
+  // useEffect(() => {
+  //   if (localStorage.getItem("token")) {
+  //     navigate=("/");
+  //   }
+  // }, [navigate]);
   useEffect(() => {
     if (localStorage.getItem("token")) {
-      navigate=("/");
+      navigate("/"); // Call the function to navigate to "/"
     }
-  }, []);
+  }, [navigate]); // Add 'navigate' to the dependency array to avoid the eslint warning
+  
 
   return (
     <div
