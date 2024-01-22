@@ -13,7 +13,8 @@ export default axiosInstance;
 
 // export const url = 'http://localhost:5000/api';
 
-// // Create an Axios instance without the authorization header
+// // Create an Axios instance without
+ //the authorization header
 // const axiosInstance = axios.create({ baseURL: url });
 
 // // Create a function to set the authorization header

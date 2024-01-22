@@ -51,7 +51,7 @@ const Cart = () => {
     });
   }
   
-  const __DEV__ = document.domain === 'https://stealdeal-backend.onrender.com/';
+  const __DEV__ = document.domain === 'stealdeal-backend.onrender.com';
 
 
   async function displayRazorpay() {
