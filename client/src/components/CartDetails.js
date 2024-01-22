@@ -51,7 +51,7 @@ const Cart = () => {
     });
   }
   
-  const __DEV__ = document.domain === 'localhost';
+  const __DEV__ = document.domain === 'https://stealdeal-backend.onrender.com/';
 
 
   async function displayRazorpay() {
@@ -66,7 +66,7 @@ const Cart = () => {
     }
   
     try {
-      const response = await fetch('http://localhost:3000/payment/createOrder', {
+      const response = await fetch('https://stealdeal-backend.onrender.com/payment/createOrder', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
