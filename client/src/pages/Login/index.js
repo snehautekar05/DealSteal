@@ -5,6 +5,8 @@ import Divider from "../../components/Divider";
 import { LoginUser } from "../../apicalls/users";
 import { useDispatch } from 'react-redux';
 import { SetLoader } from '../../redux/loadersSlice';
+import ReactGA from 'react-ga';
+
 const rules = [
   {
     required: true,
@@ -12,6 +14,11 @@ const rules = [
   },
 ];
 function Login() {
+  useEffect(() => {
+    ReactGA.initialize('G-HTDE4VD4KG');
+    // To record a page view
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  }, []);
   const navigate = useNavigate();
   const dispatch=useDispatch();
   const onFinish = async (values) => {
